@@ -42,5 +42,156 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"crossorigin="anonymous"></script>
         <script src="form-validation.js"></script>
+        <script>
+            function header() {
+                var div = document.createElement('div');
+                div.className = 'py-5 text-center';
+                var img = document.createElement('img');
+                img.className = 'd-block mx-auto mb-4';
+                img.src = 'bootstrap-solid.svg';
+                img.width = 72;
+                img.height = 72;
+                div.appendChild(img);
+
+                var h2 = document.createElement('h2');
+                h2.appendChild(document.createTextNode('Checkout form'));
+                div.appendChild(h2);
+
+                var p = document.createElement('p');
+                p.className = 'lead';
+                p.appendChild(document.createTextNode('Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.'));
+                div.appendChild(p);
+
+                return div;
+            }
+
+            function cart_item(nombre, descripcion, precio, promo = false) {
+                var li = document.createElement('li');
+                var div = document.createElement('div');
+                if (promo) {
+                    div.className = 'text-success';
+                    li.className = 'list-group-item d-flex justify-content-between bg-light';
+                } else {
+                    li.className = 'list-group-item d-flex justify-content-between lh-condensed';
+                }
+                var h6 = document.createElement('h6');
+                h6.className = 'my-0';
+                var small = document.createElement('small');
+                small.className = 'text-muted';
+                var span = document.createElement('span');
+                span.className = 'text-muted';
+                
+                h6.appendChild(document.createTextNode(nombre));
+                small.appendChild(document.createTextNode(descripcion));
+                div.appendChild(h6);
+                div.appendChild(small);
+                li.appendChild(div);
+                span.appendChild(document.createTextNode(precio));
+
+                return li;
+            }
+
+                function promo_code() {
+                    var form = document.createElement('form');
+                    form.className = 'card p2';
+                    var div = document.createElement('div');
+                    div.className = 'imput-group';
+                    form.appendChild(div);
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'form-control';
+                    input.placeholder = 'Promo code';
+                    div.appendChild(input);
+                    var div_button = document.createElement('div');
+                    div_button.className = 'input-group-append';
+                    var button = document.createElement('button');
+                    button.type = 'submit';
+                    button.className = 'btn btn-secondary';
+                    button.appendChild(document.createTextNode('Redeem'));
+                    div_button.appendChild(button);
+                    div.appendChild(div_button);
+
+                    return form;
+                }
+
+                function cart() {
+                    var container = document.createElement('div');
+                    container.className = 'col-md-4 order-md-2 mb-4';
+                    var h4 = document.createElement('h4');
+                    h4.className = 'd-flex justify-content-between align-items-center mb-3';
+                    var span = document.createElement('span');
+                    span.className = 'text-muted'
+                    span.appendChild(document.createTextNode('Your cart'));
+                    h4.appendChild(span);
+                    
+                    span = document.createElement('span');
+                    span.className = 'badge badge-secondary badge-pill';
+                    span.appendChild(document.createTextNode('3'));
+                    h4.appendChild(span);
+                    container.appendChild(h4);
+
+                    var ul = document.createElement('ul');
+                    ul.className = 'list-group mb-3';
+                    ul.appendChild(cart_item('First product', 'A description', '$3'));
+                    ul.appendChild(cart_item('Second Product', 'A description', '$85'));
+                    ul.appendChild(cart_item('Third item', 'A description', '$64'));
+                    ul.appendChild(cart_item('Promo code', 'ANEXAMPLECODE', '-99', true));
+
+                    var total = document.createElement('li');
+                    total.className = 'list-group-item d-flex justify-content-between';
+                    var total_span = document.createElement('span');
+                    total_span.appendChild(document.createTextNode('Total (USD)'));
+                    var total_price =document.createElement('strong');
+                    total_price.appendChild(document.createTextNode('$98'));
+                    total.appendChild(total_span);
+                    total.appendChild(total_price);
+                    ul.appendChild(total);
+
+                    container.appendChild(ul);
+                    container.appendChild(promo_code());
+                    return container;
+                }
+
+                function link(text) {
+                    var li = document.createElement('li');
+                    li.className = 'list-inline-item';
+                    var a = document.createElement('a');
+                    a.href = '#';
+                    a.appendChild(document.createTextNode(text));
+                    li.appendChild(a);
+                
+                    return li;
+                }
+
+                function footer() {
+                    var footer = document.createElement('footer');
+                    footer.className = 'my-5 pt-5 text-muted text-center text-small';
+                    var p = document.createElement('p');
+                    p.className = 'mb-1';
+                    p.appendChild(document.createTextNode('2019-2021 Company Name'));
+                    footer.appendChild(p);
+
+                    var ul = document.createElement('ul');
+                    ul.className = 'list-inline';
+                    ul.appendChild(link('Privacy'));
+                    ul.appendChild(link('Terms'));
+                    ul.appendChild(link('Support'));
+                    footer.appendChild(ul);
+
+                    return footer;
+                }
+
+                var body = document.getElementsByTagName('body')[0];
+                body.className = 'bg-light';
+                var container = document.createElement('div');
+                container.className = 'container';
+                body.appendChild(container);
+                container.appendChild(header());
+                var row = document.createElement('div');
+                row.className = 'row';
+                container.appendChild(row);
+                row.appendChild(cart());
+                container.appendChild(footer());
+        </script>
     </body>
 </html>
